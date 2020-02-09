@@ -16,7 +16,7 @@ pipeline {
                 }
          post {
         always {
-            junit '**/src/inspec/devopsdaysmad-aws-platform/*.xml'
+            junit '**/src/inspec/devopsdaysmad-aws-platform/inspec_results.xml'
         }
                }
 }
