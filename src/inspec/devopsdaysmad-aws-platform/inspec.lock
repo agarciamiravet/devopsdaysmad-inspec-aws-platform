@@ -1,8 +1,0 @@
----
-lockfile_version: 1
-depends:
-- name: aws-mitre
-  resolved_source:
-    git: https://github.com/mitre/cis-aws-foundations-baseline.git
-    ref: e75c0bf9344e645b51b402e9bef3be75afa7c32d
-  version_constraints: []
