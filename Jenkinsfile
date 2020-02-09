@@ -16,7 +16,7 @@ pipeline {
                 }
          post {
         always {
-            junit 'inspec_results.xml'
+            junit '**/inspec_results.xml'
         }
                }
 }
