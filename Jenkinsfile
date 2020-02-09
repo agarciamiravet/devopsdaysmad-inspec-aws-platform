@@ -1,5 +1,8 @@
 pipeline {
          agent any
+         triggers { 
+             cron('H/15 * * * *') 
+             }
          environment {
                AWS_DEFAULT_REGION    = credentials('AWS_DEFAULT_REGION')
                AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
