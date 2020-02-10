@@ -17,12 +17,12 @@ pipeline {
                          }                 
                  }
 
-                    stage('3') {
+                    stage('Upload tests in Grafana') {
                         steps {
                              dir("${env.WORKSPACE}/src/inspec/devopsdaysmad-aws-platform"){                                   
                                    sh '''
                                         ls
-                                        curl -F 'file=@output.json' -F 'platform=amazon-platform' http://localhost:5001/api/InspecResults/Upload'
+                                        curl -F 'file=@output.json' -F 'platform=amazon-platform' http://localhost:5001/api/InspecResults/Upload
                                    '''                                   
                            }                      
                         }
