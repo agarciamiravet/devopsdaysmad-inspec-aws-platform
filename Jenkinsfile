@@ -11,7 +11,7 @@ pipeline {
                           dir("${env.WORKSPACE}/src/inspec/devopsdaysmad-aws-platform"){
                                    
                                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                                        sh "exit 1"
+                                       sh 'inspec exec . -t aws:// --reporter cli junit:inspec_results.xml json:output.json'
                                     }
                            }                          
                          }                 
@@ -19,7 +19,12 @@ pipeline {
 
                     stage('3') {
                         steps {
-                            sh 'exit 0'
+                             dir("${env.WORKSPACE}/src/inspec/devopsdaysmad-aws-platform"){                                   
+                                   sh '''
+                                        ls
+                                        curl -F 'file=@output.json' -F 'platform=amazon-platform' http://localhost:5001/api/InspecResults/Upload'
+                                   '''                                   
+                           }                      
                         }
                     }
                 }
