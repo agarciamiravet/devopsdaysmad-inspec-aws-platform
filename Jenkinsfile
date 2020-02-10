@@ -9,11 +9,19 @@ pipeline {
                  stage('Inspec Platform Tests') {
                     steps {
                           dir("${env.WORKSPACE}/src/inspec/devopsdaysmad-aws-platform"){
-                              
-                                   sh '''                                                                     
-                                     inspec exec . -t aws:// --reporter cli junit:inspec_results.xml json:output.json
-                                     curl -F 'file=@output.json' -F 'platform=amazon-platform' http://localhost:5001/api/InspecResults/Upload                                                                           
-                                   '''                                   
+                                   
+                                   try
+                                   {
+                                            sh '''                                                                     
+                                              inspec exec . -t aws:// --reporter cli junit:inspec_results.xml json:output.json                                             
+                                             ''' 
+                                   }
+                                   catch
+                                   {
+                                             echo "something failed"
+                                   }
+                                   
+                                   sh'curl -F 'file=@output.json' -F 'platform=amazon-platform' http://localhost:5001/api/InspecResults/Upload'
                            }                          
                  }
                  }             
