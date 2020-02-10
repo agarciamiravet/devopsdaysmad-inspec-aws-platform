@@ -10,6 +10,8 @@ pipeline {
                     steps {
                           dir("${env.WORKSPACE}/src/inspec/devopsdaysmad-aws-platform"){
                                    
+                                   sh 'ls'
+                                   
                                    try
                                    {
                                             sh 'inspec exec . -t aws:// --reporter cli junit:inspec_results.xml json:output.json'
