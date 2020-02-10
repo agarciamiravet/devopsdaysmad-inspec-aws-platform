@@ -10,11 +10,18 @@ pipeline {
                     steps {
                           dir("${env.WORKSPACE}/src/inspec/devopsdaysmad-aws-platform"){
                                    
-                                   sh 'ls'
-                                   
+                                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                                        sh "exit 1"
+                                    }
                            }                          
+                         }                 
                  }
-                 }             
+
+                    stage('3') {
+                        steps {
+                            sh 'exit 0'
+                        }
+                    }
                 }
          post {
         always {
