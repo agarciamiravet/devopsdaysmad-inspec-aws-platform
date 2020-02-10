@@ -12,16 +12,14 @@ pipeline {
                                    
                                    try
                                    {
-                                            sh '''                                                                     
-                                              inspec exec . -t aws:// --reporter cli junit:inspec_results.xml json:output.json                                             
-                                             ''' 
+                                            sh 'inspec exec . -t aws:// --reporter cli junit:inspec_results.xml json:output.json'
                                    }
-                                   catch
+                                   catch(err)
                                    {
                                              echo "something failed"
                                    }
                                    
-                                   sh'curl -F 'file=@output.json' -F 'platform=amazon-platform' http://localhost:5001/api/InspecResults/Upload'
+                                   sh 'curl -F 'file=@output.json' -F 'platform=amazon-platform' http://localhost:5001/api/InspecResults/Upload'
                            }                          
                  }
                  }             
